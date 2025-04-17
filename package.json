@@ -19,7 +19,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "react-scripts start",
+=======
+    "start": "node server.js",
+    "client": "react-scripts start",
+>>>>>>> 312b9fabc2cbb3cb1152a2899c02e26b27de8fa3
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,5 +46,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
+=======
+  },
+  "engines": {
+    "node": ">=14.0.0"
+>>>>>>> 312b9fabc2cbb3cb1152a2899c02e26b27de8fa3
   }
 }
