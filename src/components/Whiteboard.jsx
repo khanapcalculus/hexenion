@@ -15,11 +15,14 @@ import logo from '../assets/logo/logo.png';
 // Add these imports at the top with other icon imports
 import colorPaletteIcon from '../assets/icons/palette.png';
 
-const socket = io(process.env.REACT_APP_SOCKET_URL || 'http://192.168.31.158:3001', {
+const socket = io(process.env.REACT_APP_SOCKET_URL || 'https://hexenion.onrender.com', {
   transports: ['websocket', 'polling'],
   reconnectionDelay: 1000,
   reconnectionAttempts: 10,
-  forceNew: true
+  forceNew: true,
+  path: '/socket.io', // Add explicit path
+  secure: true, // Enable secure connection
+  rejectUnauthorized: false // Allow self-signed certificates if any
 });
 
 const Whiteboard = () => {
@@ -910,3 +913,28 @@ const handleTransformEnd = (e) => {
 };
 
 export default Whiteboard;
+
+const [isConnected, setIsConnected] = useState(socket.connected);
+
+useEffect(() => {
+  socket.on('connect', () => {
+    console.log('Connected to server');
+    setIsConnected(true);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Disconnected from server');
+    setIsConnected(false);
+  });
+
+  socket.on('connect_error', (error) => {
+    console.error('Connection error:', error);
+    setIsConnected(false);
+  });
+
+  return () => {
+    socket.off('connect');
+    socket.off('disconnect');
+    socket.off('connect_error');
+  };
+}, []);
