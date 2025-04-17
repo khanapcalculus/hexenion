@@ -16,11 +16,13 @@
     "react-scripts": "5.x.x",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "serve": "^14.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "serve -s build",
+    "build": "CI=false react-scripts build",
+    "dev": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
